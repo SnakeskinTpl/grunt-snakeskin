@@ -1,0 +1,43 @@
+{
+  "name": "grunt-snakeskin",
+  "description": "Compile Snakeskin templates",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kobezzza/grunt-snakeskin",
+  "author": {
+    "name": "Kobezzza",
+    "email": "kobezzza@mail.ru",
+    "url": "https://github.com/kobezzza/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kobezzza/grunt-snakeskin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kobezzza/grunt-snakeskin/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/kobezzza/grunt-snakeskin/blob/master/LICENSE"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
