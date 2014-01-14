@@ -1,6 +1,6 @@
 # grunt-snakeskin
 
-Compile [Snakeskin](https://github.com/kobezzza/Snakeskin) templates.
+Compile [Snakeskin](https://github.com/kobezzza/Snakeskin) templates with Grunt.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
