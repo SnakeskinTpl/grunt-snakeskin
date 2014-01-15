@@ -27,7 +27,7 @@ grunt.initConfig({
 });
 ```
 
-## Параметры задачи
+## Параметры
 
 ### options.commonJS
 
