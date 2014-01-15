@@ -1,7 +1,7 @@
 {
   "name": "grunt-snakeskin",
   "description": "Compile Snakeskin templates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/kobezzza/grunt-snakeskin",
   "author": {
     "name": "Kobezzza",
@@ -39,5 +39,8 @@
   },
   "keywords": [
     "gruntplugin"
-  ]
+  ],
+  "dependencies": {
+    "snakeskin": "~3.0.3"
+  }
 }

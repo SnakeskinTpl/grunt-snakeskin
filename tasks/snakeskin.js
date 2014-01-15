@@ -7,8 +7,6 @@
  */
 
 module.exports = function(grunt) {
-	var snakeskin = require('./lib/snakeskin');
-
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var options = this.options();
 
@@ -23,7 +21,7 @@ module.exports = function(grunt) {
 				}
 
 			}).map(function (filepath) {
-				return snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
+				return require('snakeskin').compile(grunt.file.read(filepath), options, {file: filepath});
 
 			}).join('');
 

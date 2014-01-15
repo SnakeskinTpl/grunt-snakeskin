@@ -1,99 +1,61 @@
 # grunt-snakeskin
 
-Compile [Snakeskin](https://github.com/kobezzza/Snakeskin) templates with Grunt.
+Компиляция [Snakeskin](https://github.com/kobezzza/Snakeskin) шаблонов для Grunt.
 
-## Getting Started
-This plugin requires Grunt `~0.4.2`
+## Установка
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+	npm install grunt-snakeskin --save-dev
 
-```shell
-npm install grunt-snakeskin --save-dev
-```
-
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+После этого плагин необходимо подключить в ваш Gruntfile.js
 
 ```js
 grunt.loadNpmTasks('grunt-snakeskin');
 ```
 
-## The "snakeskin" task
-
-### Overview
-In your project's Gruntfile, add a section named `snakeskin` to the data object passed into `grunt.initConfig()`.
+## Пример
 
 ```js
 grunt.initConfig({
-  snakeskin: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+	snakeskin: {
+		options: {
+			// Настройки задания
+		},
+		your_target: {
+			// Указания файлов для компиляции
+		},
+	},
 });
 ```
 
-### Options
+## Параметры задачи
 
-#### options.commonJS
-Type: `Boolean`
-Default value: `false`
+### options.commonJS
 
-If "true", then compiled as node.js module.
+Тип: `Boolean`
 
-### Usage Examples
+Значение по умолчанию: `false`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+Если true, то шаблоны компилируются с экспортом в стиле commonJS (для node.js).
 
-```js
-grunt.initConfig({
-  snakeskin: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  snakeskin: {
-    options: {
-      commonJS: true
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-## License
+## Лицензия
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Andrey Kobets (Kobezzza)
+Copyright (c) 2014 Андрей Кобец (Kobezzza) <<kobezzza@mail.ru>>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+Данная лицензия разрешает лицам, получившим копию данного программного обеспечения и
+сопутствующей документации (в дальнейшем именуемыми «Программное Обеспечение»),
+безвозмездно использовать Программное Обеспечение без ограничений, включая неограниченное право на использование,
+копирование, изменение, добавление, публикацию, распространение, сублицензирование и/или
+продажу копий Программного Обеспечения, также как и лицам, которым предоставляется данное
+Программное Обеспечение, при соблюдении следующих условий:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Указанное выше уведомление об авторском праве и данные условия должны быть включены во все копии или
+значимые части данного Программного Обеспечения.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ДАННОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ПРЕДОСТАВЛЯЕТСЯ «КАК ЕСТЬ», БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНО ВЫРАЖЕННЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ,
+ВКЛЮЧАЯ, НО НЕ ОГРАНИЧИВАЯСЬ ГАРАНТИЯМИ ТОВАРНОЙ ПРИГОДНОСТИ, СООТВЕТСТВИЯ ПО ЕГО КОНКРЕТНОМУ НАЗНАЧЕНИЮ И
+ОТСУТСТВИЯ НАРУШЕНИЙ ПРАВ. НИ В КАКОМ СЛУЧАЕ АВТОРЫ ИЛИ ПРАВООБЛАДАТЕЛИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ПО ИСКАМ О
+ВОЗМЕЩЕНИИ УЩЕРБА, УБЫТКОВ ИЛИ ДРУГИХ ТРЕБОВАНИЙ ПО ДЕЙСТВУЮЩИМ КОНТРАКТАМ, ДЕЛИКТАМ ИЛИ ИНОМУ, ВОЗНИКШИМ ИЗ,
+ИМЕЮЩИМ ПРИЧИНОЙ ИЛИ СВЯЗАННЫМ С ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ ИЛИ ИСПОЛЬЗОВАНИЕМ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ ИЛИ
+ИНЫМИ ДЕЙСТВИЯМИ С ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ.
