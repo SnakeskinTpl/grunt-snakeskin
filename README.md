@@ -1,6 +1,6 @@
 # grunt-snakeskin
 
-Компиляция [Snakeskin](https://github.com/kobezzza/Snakeskin) шаблонов для Grunt.
+Компиляция [Snakeskin](https://github.com/kobezzza/Snakeskin) шаблонов вместе с Grunt.
 
 ## Установка
 
