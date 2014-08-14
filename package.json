@@ -41,6 +41,6 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "snakeskin": "~3.0.3"
+    "snakeskin": "~4"
   }
 }
