@@ -4,7 +4,9 @@
 
 ## Установка
 
-	npm install grunt-snakeskin --save-dev
+```bash
+npm install grunt-snakeskin --save-dev
+```
 
 После этого плагин необходимо подключить в ваш Gruntfile.js
 
@@ -27,21 +29,13 @@ grunt.initConfig({
 });
 ```
 
-## Параметры
-
-### options.commonJS
-
-Тип: `Boolean`
-
-Значение по умолчанию: `false`
-
-Если true, то шаблоны компилируются с экспортом в стиле commonJS (для node.js).
+## [Параметры](https://github.com/kobezzza/Snakeskin/wiki/compile#opt_params)
 
 ## Лицензия
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Андрей Кобец (Kobezzza) <<kobezzza@mail.ru>>
+Copyright (c) 2014 Андрей Кобец (Kobezzza) <kobezzza@mail.ru>
 
 Данная лицензия разрешает лицам, получившим копию данного программного обеспечения и
 сопутствующей документации (в дальнейшем именуемыми «Программное Обеспечение»),
