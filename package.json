@@ -38,7 +38,8 @@
     "grunt": "~0.4"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "snakeskin"
   ],
   "dependencies": {
     "snakeskin": "~4"
