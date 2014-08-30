@@ -3,7 +3,7 @@
 Компиляция [Snakeskin](https://github.com/kobezzza/Snakeskin) шаблонов вместе с Grunt.
 
 [![NPM version](https://badge.fury.io/js/grunt-snakeskin.svg)](http://badge.fury.io/js/grunt-snakeskin)
-[![NPM dependencies](https://david-dm.org/kobezzza/grunt-snakeskin.png)](https://david-dm.org/kobezzza/grunt-snakeskin)
+[![NPM dependencies](https://david-dm.org/kobezzza/grunt-snakeskin.svg)](https://david-dm.org/kobezzza/grunt-snakeskin)
 [![Build Status](https://travis-ci.org/kobezzza/grunt-snakeskin.svg?branch=master)](https://travis-ci.org/kobezzza/grunt-snakeskin)
 
 ## Установка
