@@ -1,3 +1,3 @@
-{template base(name = 'world')}
+{placeholder base(name = 'world')}
 	<h1>Hello {name}!</h1>
-{/template}
+{/placeholder}

@@ -33,6 +33,16 @@ module.exports = function (grunt) {
 				files: {
 					'tmp/test.js': ['test/fixtures/base.ss', 'test/fixtures/child.ss']
 				}
+			},
+
+			test2: {
+				options: {
+					exec: true
+				},
+
+				files: {
+					'tmp/test.html': ['test/fixtures/base.ss', 'test/fixtures/child.ss']
+				}
 			}
 		},
 

@@ -5,12 +5,15 @@ exports.snakeskin = {
 	},
 
 	test: function (test) {
-		test.expect(1);
+		test.expect(2);
 
-		var tpl = require('../tmp/test.js').init(require('snakeskin'));
-		var expected = grunt.file.read('test/expected/test');
+		var js = require('../tmp/test.js').init(require('snakeskin')),
+			html = grunt.file.read('tmp/test.html'),
+			expected = grunt.file.read('test/expected/test');
 
-		test.equal(tpl.child().trim(), expected, 'should describe what the custom option(s) behavior is.');
+		test.equal(js.child().trim(), expected, 'renderMode: js');
+		test.equal(html.trim(), expected, 'renderMode: html');
+
 		test.done();
 	}
 };
