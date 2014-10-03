@@ -63,6 +63,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-	grunt.registerTask('test', ['snakeskin', 'nodeunit']);
+	grunt.registerTask('test', ['clean', 'snakeskin', 'nodeunit']);
 	grunt.registerTask('default', ['jshint', 'test']);
 };
