@@ -21,14 +21,14 @@ module.exports = function (grunt) {
 		}
 
 		this.files.forEach(function (f) {
+			var isDir = !path.extname(f.dest);
 			var src = f.src.filter(function (filepath) {
-				if (!grunt.file.exists(filepath)) {
-					grunt.log.warn('Source file "' + filepath + '" not found.');
-					return false;
-
-				} else {
+				if (grunt.file.exists(filepath)) {
 					return true;
 				}
+
+				grunt.log.warn('Source file "' + filepath + '" not found.');
+				return false;
 
 			}).map(function (filepath) {
 				var tpls = {};
@@ -40,20 +40,38 @@ module.exports = function (grunt) {
 				var res = snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
 
 				if (options.exec) {
-					res = snakeskin.returnMainTpl(tpls, filepath, options.tpl);
-					res = res ? res(options.data) : '';
+					res = snakeskin.returnMainTpl(tpls, filepath, options.tpl) || '';
+
+					if (res) {
+						res = res(options.data);
+
+						if (isDir && prettyPrint) {
+							res = beautify['html'](res);
+						}
+					}
+				}
+
+				if (isDir) {
+					grunt.file.write(
+						path.join(f.dest, path.basename(filepath) + (options.exec ? '.html' : '.js')),
+						res
+					);
+
+					grunt.log.writeln('File "' + f.dest + '" created.');
 				}
 
 				return res;
 
 			}).join('');
 
-			if (prettyPrint) {
-				src = (beautify[path.extname(f.dest).replace(/^\./, '')] || beautify['html'])(src);
-			}
+			if (!isDir) {
+				if (prettyPrint) {
+					src = (beautify[path.extname(f.dest).replace(/^\./, '')] || beautify['html'])(src);
+				}
 
-			grunt.file.write(f.dest, src);
-			grunt.log.writeln('File "' + f.dest + '" created.');
+				grunt.file.write(f.dest, src);
+				grunt.log.writeln('File "' + f.dest + '" created.');
+			}
 		});
 	});
 };
