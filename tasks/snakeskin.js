@@ -6,11 +6,19 @@
  * Licensed under the MIT license.
  */
 
-var snakeskin = require('snakeskin');
+var path = require('path');
+var snakeskin = require('snakeskin'),
+	beautify = require('js-beautify');
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
-		var options = this.options();
+		var options = this.options(),
+			prettyPrint;
+
+		if (options.exec && options.prettyPrint) {
+			options.prettyPrint = false;
+			prettyPrint = true;
+		}
 
 		this.files.forEach(function (f) {
 			var src = f.src.filter(function (filepath) {
@@ -39,6 +47,10 @@ module.exports = function (grunt) {
 				return res;
 
 			}).join('');
+
+			if (prettyPrint) {
+				src = (beautify[path.extname(f.dest).replace(/^\./, '')] || beautify['html'])(src);
+			}
 
 			grunt.file.write(f.dest, src);
 			grunt.log.writeln('File "' + f.dest + '" created.');

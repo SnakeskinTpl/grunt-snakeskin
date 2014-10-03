@@ -1,2 +1,2 @@
-{template child(name) extends base}
+{template child(params) extends base}
 {/template}

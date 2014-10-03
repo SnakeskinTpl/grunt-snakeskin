@@ -1,3 +1,4 @@
-{placeholder base(name = 'world')}
-	<h1>Hello {name}!</h1>
-{/placeholder}
+- placeholder base(@params)
+	< hr
+	< h1
+		< span color = red :: Hello {@name}!
