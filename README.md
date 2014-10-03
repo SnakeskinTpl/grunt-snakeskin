@@ -23,11 +23,15 @@ grunt.loadNpmTasks('grunt-snakeskin');
 ```js
 grunt.initConfig({
 	snakeskin: {
-		options: {
-			// Настройки задания
-		},
-		your_target: {
-			// Указания файлов для компиляции
+		compile: {
+			options: {
+				exec: true,
+				prettyPrint: true
+			},
+
+			files: {
+				'html/': ['test/fixtures/*.ss']
+			}
 		}
 	}
 });
