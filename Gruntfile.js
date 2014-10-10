@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 		snakeskin: {
 			test: {
 				options: {
-					commonJS: true,
+					exports: 'commonJS',
 					prettyPrint: true
 				},
 
