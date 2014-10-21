@@ -20,6 +20,9 @@ module.exports = function (grunt) {
 			prettyPrint = true;
 		}
 
+		options.throws = true;
+		options.cache = false;
+
 		this.files.forEach(function (f) {
 			var isDir = !path.extname(f.dest);
 			var src = f.src.filter(function (filepath) {
@@ -31,33 +34,39 @@ module.exports = function (grunt) {
 				return false;
 
 			}).map(function (filepath) {
-				var tpls = {};
+				var tpls = {},
+					res = '';
 
 				if (options.exec) {
 					options.context = tpls;
 				}
 
-				var res = snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
+				try {
+					res = snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
 
-				if (options.exec) {
-					res = snakeskin.returnMainTpl(tpls, filepath, options.tpl) || '';
+					if (options.exec) {
+						res = snakeskin.returnMainTpl(tpls, filepath, options.tpl) || '';
 
-					if (res) {
-						res = res(options.data);
+						if (res) {
+							res = res(options.data);
 
-						if (isDir && prettyPrint) {
-							res = beautify['html'](res);
+							if (isDir && prettyPrint) {
+								res = beautify['html'](res);
+							}
 						}
 					}
-				}
 
-				if (isDir) {
-					grunt.file.write(
-						path.join(f.dest, path.basename(filepath) + (options.exec ? '.html' : '.js')),
-						res
-					);
+					if (isDir) {
+						grunt.file.write(
+							path.join(f.dest, path.basename(filepath) + (options.exec ? '.html' : '.js')),
+							res
+						);
 
-					grunt.log.writeln('File "' + f.dest + '" created.');
+						grunt.log.writeln('File "' + f.dest + '" created.');
+					}
+
+				} catch (err) {
+					grunt.log.error(err.message);
 				}
 
 				return res;
