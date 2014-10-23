@@ -53,6 +53,8 @@ module.exports = function (grunt) {
 							if (isDir && prettyPrint) {
 								res = beautify['html'](res);
 							}
+
+							res += options.lineSeparator || '\n';
 						}
 					}
 
