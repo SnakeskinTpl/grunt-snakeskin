@@ -57,8 +57,17 @@ module.exports = function (grunt) {
 					}
 
 					if (isDir) {
+						var savePath;
+
+						if (options.exec) {
+							savePath = path.basename(filepath, path.extname(filepath)) + '.html';
+
+						} else {
+							savePath = path.basename(filepath) + '.js';
+						}
+
 						grunt.file.write(
-							path.join(f.dest, path.basename(filepath) + (options.exec ? '.html' : '.js')),
+							path.join(f.dest, savePath),
 							res
 						);
 
