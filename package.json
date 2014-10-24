@@ -1,7 +1,7 @@
 {
   "name": "grunt-snakeskin",
   "description": "Compile Snakeskin templates with Grunt",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "homepage": "https://github.com/kobezzza/grunt-snakeskin",
   "author": {
     "name": "Kobezzza",
@@ -29,20 +29,20 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6",
-    "grunt-contrib-clean": "~0.4",
-    "grunt-contrib-nodeunit": "~0.2",
-    "grunt": "~0.4"
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.4.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4"
+    "grunt": "^0.4.5"
   },
   "keywords": [
     "gruntplugin",
     "snakeskin"
   ],
   "dependencies": {
-    "snakeskin": "~6",
-    "js-beautify": "~1"
+    "js-beautify": "^1.5.4",
+    "snakeskin": "^6.0.0"
   }
 }
