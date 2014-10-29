@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 
 		options.throws = true;
 		options.cache = false;
+		options.lineSeparator = options.lineSeparator || '\n';
 
 		this.files.forEach(function (f) {
 			var isDir = !path.extname(f.dest);
@@ -50,11 +51,12 @@ module.exports = function (grunt) {
 						if (res) {
 							res = res(options.data);
 
-							if (isDir && prettyPrint) {
+							if (prettyPrint) {
 								res = beautify['html'](res);
+								res = res.replace(/\r\n|\r|\n/g, options.lineSeparator);
 							}
 
-							res += options.lineSeparator || '\n';
+							res += options.lineSeparator;
 						}
 					}
 
@@ -85,10 +87,6 @@ module.exports = function (grunt) {
 			}).join('');
 
 			if (!isDir) {
-				if (prettyPrint) {
-					src = (beautify[path.extname(f.dest).replace(/^\./, '')] || beautify['html'])(src);
-				}
-
 				grunt.file.write(f.dest, src);
 				grunt.log.writeln('File "' + f.dest + '" created.');
 			}

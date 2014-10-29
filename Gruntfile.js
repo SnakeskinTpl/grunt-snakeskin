@@ -6,6 +6,8 @@
  * Licensed under the MIT license.
  */
 
+var eol = require('os').EOL;
+
 module.exports = function (grunt) {
 	grunt.initConfig({
 		jshint: {
@@ -28,6 +30,7 @@ module.exports = function (grunt) {
 			test: {
 				options: {
 					exports: 'commonJS',
+					lineSeparator: eol,
 					prettyPrint: true
 				},
 
@@ -39,6 +42,7 @@ module.exports = function (grunt) {
 			test2: {
 				options: {
 					exec: true,
+					lineSeparator: eol,
 					prettyPrint: true,
 					data: {
 						name: 'world'
