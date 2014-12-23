@@ -55,7 +55,7 @@ grunt.initConfig({
 определяется по правилу:
 
 ```js
-%fileName% || main || index || Object.keys()[0];
+%fileName% || main || index || Object.keys().sort()[0];
 ```
 
 ### data

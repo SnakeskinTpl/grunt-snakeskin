@@ -53,7 +53,7 @@ module.exports = function (grunt) {
 
 							if (prettyPrint) {
 								res = beautify['html'](res);
-								res = res.replace(/\r\n|\r|\n/g, options.lineSeparator);
+								res = res.replace(/\r?\n|\r/g, options.lineSeparator);
 							}
 
 							res += options.lineSeparator;
