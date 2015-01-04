@@ -14,6 +14,8 @@ npm install grunt-snakeskin --save-dev
 
 ## Usage
 
+**Gruntfile.js**
+
 ```js
 module.exports = function (grunt) {
 	grunt.initConfig({
@@ -33,7 +35,7 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-snakeskin');
 	grunt.registerTask('default', ['snakeskin']);
-});
+};
 ```
 
 ## [Options](https://github.com/kobezzza/Snakeskin/wiki/compile#opt_params)
