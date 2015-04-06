@@ -4,6 +4,7 @@ Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) templates with Grun
 
 [![NPM version](http://img.shields.io/npm/v/grunt-snakeskin.svg?style=flat)](http://badge.fury.io/js/grunt-snakeskin)
 [![NPM dependencies](http://img.shields.io/david/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin)
+[![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin#info=devDependencies&view=table)
 [![Build Status](http://img.shields.io/travis/SnakeskinTpl/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/grunt-snakeskin)
 
 ## Install
@@ -18,23 +19,23 @@ npm install grunt-snakeskin --save-dev
 
 ```js
 module.exports = function (grunt) {
-	grunt.initConfig({
-		snakeskin: {
-			compile: {
-				options: {
-					exec: true,
-					prettyPrint: true
-				},
+  grunt.initConfig({
+    snakeskin: {
+      compile: {
+        options: {
+          exec: true,
+          prettyPrint: true
+        },
 
-				files: {
-					'html/': ['test/fixtures/*.ss']
-				}
-			}
-		}
-	});
+        files: {
+          'html/': ['test/fixtures/*.ss']
+        }
+      }
+    }
+  });
 
-	grunt.loadNpmTasks('grunt-snakeskin');
-	grunt.registerTask('default', ['snakeskin']);
+  grunt.loadNpmTasks('grunt-snakeskin');
+  grunt.registerTask('default', ['snakeskin']);
 };
 ```
 
