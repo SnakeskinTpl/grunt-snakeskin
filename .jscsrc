@@ -2,7 +2,8 @@
   "esnext": true,
   "fileExtensions": [".js"],
   "excludeFiles": [
-    "node_modules/**/*"
+    "node_modules/**/*",
+    "tmp/**/*"
   ],
 
   "validateIndentation": "\t",
