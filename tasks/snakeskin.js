@@ -1,18 +1,20 @@
 /*
  * grunt-snakeskin
- * https://github.com/kobezzza/grunt-snakeskin
+ * https://github.com/SnakeskinTpl/grunt-snakeskin
  *
- * Copyright (c) 2014 kobezzza
+ * Copyright (c) 2014-2015 kobezzza
  * Licensed under the MIT license.
  */
 
 var path = require('path');
-var snakeskin = require('snakeskin'),
+var
+	snakeskin = require('snakeskin'),
 	beautify = require('js-beautify');
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
-		var options = this.options(),
+		var
+			options = this.options(),
 			prettyPrint;
 
 		if (options.exec && options.prettyPrint) {

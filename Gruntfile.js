@@ -1,8 +1,8 @@
 /*
  * grunt-snakeskin
- * https://github.com/kobezzza/grunt-snakeskin
+ * https://github.com/SnakeskinTpl/grunt-snakeskin
  *
- * Copyright (c) 2014 kobezzza
+ * Copyright (c) 2014-2015 kobezzza
  * Licensed under the MIT license.
  */
 

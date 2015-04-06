@@ -1,10 +1,10 @@
 # [grunt](http://gruntjs.com/)-snakeskin
 
-Using [Snakeskin](https://github.com/kobezzza/Snakeskin) templates with Grunt.
+Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) templates with Grunt.
 
 [![NPM version](http://img.shields.io/npm/v/grunt-snakeskin.svg?style=flat)](http://badge.fury.io/js/grunt-snakeskin)
-[![NPM dependencies](http://img.shields.io/david/kobezzza/grunt-snakeskin.svg?style=flat)](https://david-dm.org/kobezzza/grunt-snakeskin)
-[![Build Status](http://img.shields.io/travis/kobezzza/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/kobezzza/grunt-snakeskin)
+[![NPM dependencies](http://img.shields.io/david/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin)
+[![Build Status](http://img.shields.io/travis/SnakeskinTpl/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/grunt-snakeskin)
 
 ## Install
 
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 };
 ```
 
-## [Options](https://github.com/kobezzza/Snakeskin/wiki/compile#opt_params)
+## [Options](https://github.com/SnakeskinTpl/Snakeskin/wiki/compile#opt_params)
 
 ### exec
 
@@ -64,6 +64,6 @@ Type: `?`
 
 Data for the executable template (if set `exec`).
 
-## [License](https://github.com/kobezzza/grunt-snakeskin/blob/master/LICENSE)
+## [License](https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE)
 
 The MIT License.

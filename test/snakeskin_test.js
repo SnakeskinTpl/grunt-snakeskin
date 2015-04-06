@@ -7,10 +7,12 @@ exports.snakeskin = {
 	test: function (test) {
 		test.expect(2);
 
-		var js = require('../tmp/test.js').init(require('snakeskin')),
+		var
+			js = require('../tmp/test.js').init(require('snakeskin')),
 			html = grunt.file.read('tmp/test.html');
 
-		var expected1 = grunt.file.read('test/expected/test'),
+		var
+			expected1 = grunt.file.read('test/expected/test'),
 			expected2 = grunt.file.read('test/expected/test2').trim();
 
 		test.equal(html, expected1, 'renderMode: html');
