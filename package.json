@@ -1,7 +1,7 @@
 {
   "name": "grunt-snakeskin",
   "description": "Using Snakeskin templates with Grunt.",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
   "author": {
     "name": "kobezzza",
@@ -32,7 +32,8 @@
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.1",
-    "grunt-contrib-nodeunit": "^0.4.1"
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "jscs": "^1.12.0"
   },
   "peerDependencies": {
     "grunt": "^0.4.5"
