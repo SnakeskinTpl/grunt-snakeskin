@@ -1,4 +1,5 @@
-# [grunt](http://gruntjs.com/)-snakeskin
+[grunt](http://gruntjs.com/)-snakeskin
+======================================
 
 Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) templates with Grunt.
 
