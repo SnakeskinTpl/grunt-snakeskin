@@ -6,8 +6,6 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-var eol = require('os').EOL;
-
 module.exports = function (grunt) {
 	grunt.initConfig({
 		jshint: {
@@ -30,7 +28,7 @@ module.exports = function (grunt) {
 			test: {
 				options: {
 					exports: 'commonJS',
-					lineSeparator: eol,
+					lineSeparator: '\n',
 					prettyPrint: true
 				},
 
@@ -42,7 +40,7 @@ module.exports = function (grunt) {
 			test2: {
 				options: {
 					exec: true,
-					lineSeparator: eol,
+					lineSeparator: '\n',
 					prettyPrint: true,
 					data: {
 						name: 'world'
