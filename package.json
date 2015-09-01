@@ -4,7 +4,7 @@
   "license": "MIT",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
   "main": "Gruntfile.js",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
