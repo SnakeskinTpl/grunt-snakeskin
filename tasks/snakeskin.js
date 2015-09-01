@@ -6,98 +6,93 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-var path = require('path');
 var
+	$C = require('collection.js').$C;
+
+var
+	path = require('path'),
 	snakeskin = require('snakeskin'),
 	beautify = require('js-beautify');
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
-			options = this.options(),
+			opts = $C.extend(true, {lineSeparator: '\n'}, this.options(), {throws: true, cache: false}),
 			prettyPrint;
 
-		if (options.exec && options.prettyPrint) {
-			options.prettyPrint = false;
+		if (opts.exec && opts.prettyPrint) {
+			opts.prettyPrint = false;
 			prettyPrint = true;
 		}
 
-		options.throws = true;
-		options.cache = false;
-		options.lineSeparator = options.lineSeparator || '\n';
+		function filter(src) {
+			if (grunt.file.exists(src)) {
+				return true;
+			}
 
-		this.files.forEach(function (f) {
-			var isDir = !path.extname(f.dest);
-			var src = f.src.filter(function (filepath) {
-				if (grunt.file.exists(filepath)) {
-					return true;
-				}
+			grunt.log.warn('Source file "' + src + '" not found.');
+			return false;
+		}
 
-				grunt.log.warn('Source file "' + filepath + '" not found.');
-				return false;
+		$C(this.files).forEach(function (file) {
+			var
+				isDir = !path.extname(file.dest);
 
-			}).map(function (filepath) {
-				var tpls = {},
+			function map(src) {
+				var
+					tpls = {},
 					res = '';
 
-				if (options.exec) {
-					options.context = tpls;
+				if (opts.exec) {
+					opts.context = tpls;
 				}
 
 				try {
-					console.log(0);
+					res = snakeskin.compile(grunt.file.read(src), opts, {file: src});
 
-					res = snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
-
-					if (options.exec) {
-						res = snakeskin.returnMainTpl(tpls, filepath, options.tpl) || '';
+					if (opts.exec) {
+						res = snakeskin.returnMainTpl(tpls, src, opts.tpl) || '';
 
 						if (res) {
-							res = res(options.data);
+							res = res(opts.data);
 
 							if (prettyPrint) {
 								res = beautify['html'](res);
-								res = res.replace(/\r?\n|\r/g, options.lineSeparator);
+								res = res.replace(/\r?\n|\r/g, opts.lineSeparator);
 							}
 
-							res += options.lineSeparator;
+							res += opts.lineSeparator;
 						}
 					}
-
-					console.log(1);
 
 					if (isDir) {
 						var savePath;
 
-						if (options.exec) {
-							savePath = path.basename(filepath, path.extname(filepath)) + '.html';
+						if (opts.exec) {
+							savePath = path.basename(src, path.extname(src)) + '.html';
 
 						} else {
-							savePath = path.basename(filepath) + '.js';
+							savePath = path.basename(src) + '.js';
 						}
 
 						grunt.file.write(
-							path.join(f.dest, savePath),
+							path.join(file.dest, savePath),
 							res
 						);
 
-						grunt.log.writeln('File "' + f.dest + '" created.');
+						grunt.log.writeln('File "' + file.dest + '" created.');
 					}
 
-					console.log(2);
-
 				} catch (err) {
-					console.log(err);
-					//grunt.log.error(err.message);
+					grunt.log.error(err.message);
 				}
 
 				return res;
-
-			}).join('');
+			}
 
 			if (!isDir) {
-				grunt.file.write(f.dest, src);
-				grunt.log.writeln('File "' + f.dest + '" created.');
+				grunt.file.write(file.dest, $C(file.src).map(map, {filter: filter}).join(''));
+				grunt.log.writeln('File "' + file.dest + '" created.');
 			}
 		});
 	});
