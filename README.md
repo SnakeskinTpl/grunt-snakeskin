@@ -48,7 +48,7 @@ Type: `Boolean`
 
 Default: `false`
 
-If the parameter is set to `true`, after compiling template will be launched and the results of its work will be saved.
+If the parameter is set to `true` the template will be launched after compiling and the results of it work will be saved.
 
 ### tpl
 
