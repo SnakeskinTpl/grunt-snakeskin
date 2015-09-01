@@ -54,7 +54,7 @@ If the parameter is set to `true`, after compiling template will be launched and
 
 Type: `String`
 
-The name of the executable template (if set `exec`), if the parameter is not specified, then uses the rule:
+The name of the executable template (if is set `exec`), if the parameter is not specified, then uses the rule:
 
 ```js
 %fileName% || main || index || Object.keys().sort()[0];
@@ -64,7 +64,7 @@ The name of the executable template (if set `exec`), if the parameter is not spe
 
 Type: `?`
 
-Data for the executable template (if set `exec`).
+Data for the executable template (if is set `exec`).
 
 ## [License](https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE)
 
