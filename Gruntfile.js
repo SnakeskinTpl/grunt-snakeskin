@@ -1,9 +1,9 @@
-/*
+/*!
  * grunt-snakeskin
  * https://github.com/SnakeskinTpl/grunt-snakeskin
  *
- * Copyright (c) 2014-2015 kobezzza
- * Licensed under the MIT license.
+ * Released under the MIT license
+ * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
 var eol = require('os').EOL;

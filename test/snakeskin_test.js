@@ -1,3 +1,11 @@
+/*!
+ * grunt-snakeskin
+ * https://github.com/SnakeskinTpl/grunt-snakeskin
+ *
+ * Released under the MIT license
+ * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
+ */
+
 var grunt = require('grunt');
 exports.snakeskin = {
 	setUp: function (done) {

@@ -1,9 +1,9 @@
-/*
+/*!
  * grunt-snakeskin
  * https://github.com/SnakeskinTpl/grunt-snakeskin
  *
- * Copyright (c) 2014-2015 kobezzza
- * Licensed under the MIT license.
+ * Released under the MIT license
+ * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
 var path = require('path');
@@ -45,6 +45,8 @@ module.exports = function (grunt) {
 				}
 
 				try {
+					console.log(0);
+
 					res = snakeskin.compile(grunt.file.read(filepath), options, {file: filepath});
 
 					if (options.exec) {
@@ -61,6 +63,8 @@ module.exports = function (grunt) {
 							res += options.lineSeparator;
 						}
 					}
+
+					console.log(1);
 
 					if (isDir) {
 						var savePath;
@@ -80,8 +84,11 @@ module.exports = function (grunt) {
 						grunt.log.writeln('File "' + f.dest + '" created.');
 					}
 
+					console.log(2);
+
 				} catch (err) {
-					grunt.log.error(err.message);
+					console.log(err);
+					//grunt.log.error(err.message);
 				}
 
 				return res;
