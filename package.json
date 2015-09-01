@@ -1,8 +1,10 @@
 {
   "name": "grunt-snakeskin",
   "description": "Using Snakeskin templates with Grunt.",
-  "version": "1.2.12",
+  "license": "MIT",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
+  "main": "Gruntfile.js",
+  "version": "6.0.0",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
@@ -15,14 +17,16 @@
   "bugs": {
     "url": "https://github.com/SnakeskinTpl/grunt-snakeskin/issues"
   },
-  "license": "MIT",
-  "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.10"
   },
   "scripts": {
     "test": "grunt test"
   },
+  "keywords": [
+    "gruntplugin",
+    "snakeskin"
+  ],
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
@@ -33,11 +37,8 @@
   "peerDependencies": {
     "grunt": "^0.4.5"
   },
-  "keywords": [
-    "gruntplugin",
-    "snakeskin"
-  ],
   "dependencies": {
+    "collection.js": "^5.5.6",
     "js-beautify": "^1.5.4",
     "snakeskin": "^6.0.0"
   }
