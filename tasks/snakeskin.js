@@ -40,35 +40,36 @@ module.exports = function (grunt) {
 
 			function map(src) {
 				var
+					params = $C.extend(true, {}, opts),
 					tpls = {},
 					res = '';
 
-				if (opts.exec) {
-					opts.context = tpls;
+				if (params.exec) {
+					params.context = tpls;
 				}
 
 				try {
-					res = snakeskin.compile(grunt.file.read(src), opts, {file: src});
+					res = snakeskin.compile(grunt.file.read(src), params, {file: src});
 
-					if (opts.exec) {
-						res = snakeskin.returnMainTpl(tpls, src, opts.tpl) || '';
+					if (params.exec) {
+						res = snakeskin.returnMainTpl(tpls, src, params.tpl) || '';
 
 						if (res) {
-							res = res(opts.data);
+							res = res(params.data);
 
 							if (prettyPrint) {
 								res = beautify['html'](res);
-								res = res.replace(/\r?\n|\r/g, opts.lineSeparator);
+								res = res.replace(/\r?\n|\r/g, params.lineSeparator);
 							}
 
-							res += opts.lineSeparator;
+							res += params.lineSeparator;
 						}
 					}
 
 					if (isDir) {
 						var savePath;
 
-						if (opts.exec) {
+						if (params.exec) {
 							savePath = path.basename(src, path.extname(src)) + '.html';
 
 						} else {
