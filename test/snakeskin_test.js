@@ -16,15 +16,15 @@ exports.snakeskin = {
 		test.expect(2);
 
 		var
-			js = require('../tmp/test.js').init(require('snakeskin')),
+			js = require('../tmp/test.js'),
 			html = grunt.file.read('tmp/test.html');
 
 		var
 			expected1 = grunt.file.read('test/expected/test'),
 			expected2 = grunt.file.read('test/expected/test2').trim();
 
-		test.equal(js.child({name: 'world'}), expected2, 'renderMode: js');
-		test.equal(true, true, 'renderMode: html');
+		test.equal(html, expected1, 'renderMode: html');
+		test.equal(js.child.child({name: 'world'}), expected2, 'renderMode: js');
 
 		test.done();
 	}

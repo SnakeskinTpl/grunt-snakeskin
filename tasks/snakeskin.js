@@ -17,7 +17,7 @@ var
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
-			opts = $C.extend(true, {lineSeparator: '\n'}, this.options(), {throws: true, cache: false}),
+			opts = $C.extend(false, {eol: '\n'}, this.options(), {throws: true, cache: false}),
 			prettyPrint;
 
 		if (opts.exec && opts.prettyPrint) {
@@ -52,17 +52,17 @@ module.exports = function (grunt) {
 					res = snakeskin.compile(grunt.file.read(src), params, {file: src});
 
 					if (params.exec) {
-						res = snakeskin.returnMainTpl(tpls, src, params.tpl) || '';
+						res = snakeskin.getMainTpl(tpls, src, params.tpl) || '';
 
 						if (res) {
 							res = res(params.data);
 
 							if (prettyPrint) {
 								res = beautify['html'](res);
-								res = res.replace(/\r?\n|\r/g, params.lineSeparator);
+								res = res.replace(/\r?\n|\r/g, params.eol);
 							}
 
-							res += params.lineSeparator;
+							res += params.eol;
 						}
 					}
 

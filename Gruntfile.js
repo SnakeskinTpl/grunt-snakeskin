@@ -27,20 +27,17 @@ module.exports = function (grunt) {
 		snakeskin: {
 			test: {
 				options: {
-					exports: 'commonJS',
-					lineSeparator: '\n',
 					prettyPrint: true
 				},
 
 				files: {
-					'tmp/test.js': ['test/fixtures/base.ss', 'test/fixtures/child.ss']
+					'tmp/test.js': ['test/fixtures/child.ss']
 				}
 			},
 
 			test2: {
 				options: {
 					exec: true,
-					lineSeparator: '\n',
 					prettyPrint: true,
 					data: {
 						name: 'world'
@@ -48,7 +45,7 @@ module.exports = function (grunt) {
 				},
 
 				files: {
-					'tmp/test.html': ['test/fixtures/base.ss', 'test/fixtures/child.ss']
+					'tmp/test.html': ['test/fixtures/child.ss']
 				}
 			}
 		},
