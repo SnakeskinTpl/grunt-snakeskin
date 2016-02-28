@@ -33,15 +33,15 @@
     "js-beautify": "^1.5.4"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.7.0",
-    "grunt-contrib-jshint": "^0.12.0",
+    "grunt": "^1.0.0-rc1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^0.4.1",
     "jscs": "^2.0.0",
-    "snakeskin": "^7.0.0-beta1"
+    "snakeskin": "^7.0.0-beta19"
   },
   "peerDependencies": {
     "grunt": "*",
-    "snakeskin": "^7.0.0-beta1"
+    "snakeskin": "^7.0.0-beta19"
   }
 }
