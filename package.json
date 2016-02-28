@@ -38,10 +38,10 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^0.4.1",
     "jscs": "^2.0.0",
-    "snakeskin": "^7.0.0-beta19"
+    "snakeskin": "^7.0.0-beta20"
   },
   "peerDependencies": {
     "grunt": "*",
-    "snakeskin": "^7.0.0-beta19"
+    "snakeskin": "^7.0.0-beta20"
   }
 }
