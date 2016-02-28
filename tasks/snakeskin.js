@@ -18,22 +18,22 @@ module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
 			ssrc = path.join(process.cwd(), '.snakeskinrc'),
-			options = this.options();
+			opts = this.options();
 
-		if (!options && exists(ssrc)) {
-			options = snakeskin.toObj(ssrc);
+		if (!this.data.options && exists(ssrc)) {
+			opts = snakeskin.toObj(ssrc);
 		}
 
-		options = options || {};
-		options.throws = true;
-		options.cache = false;
-		options.eol = options.eol || '\n';
+		opts = opts || {};
+		opts.throws = true;
+		opts.cache = false;
+		opts.eol = opts.eol || '\n';
 
 		var
 			prettyPrint;
 
-		if (options.exec && options.prettyPrint) {
-			options.prettyPrint = false;
+		if (opts.exec && opts.prettyPrint) {
+			opts.prettyPrint = false;
 			prettyPrint = true;
 		}
 
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 
 			function map(src) {
 				var
-					params = Object.assign({}, options),
+					params = Object.assign({}, opts),
 					tpls = {},
 					res = '';
 
