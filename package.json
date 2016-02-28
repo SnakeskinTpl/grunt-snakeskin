@@ -4,7 +4,7 @@
   "license": "MIT",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
   "main": "Gruntfile.js",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
@@ -28,7 +28,8 @@
     "snakeskin"
   ],
   "dependencies": {
-    "collection.js": "^5.5.6",
+    "core-js": "^2.1.1",
+    "exists-sync": "0.0.3",
     "js-beautify": "^1.5.4"
   },
   "devDependencies": {

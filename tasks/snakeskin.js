@@ -6,22 +6,34 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-var
-	$C = require('collection.js').$C;
+require('core-js/es6/object');
 
 var
 	path = require('path'),
 	snakeskin = require('snakeskin'),
-	beautify = require('js-beautify');
+	beautify = require('js-beautify'),
+	exists = require('exists-sync');
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
-			opts = $C.extend(false, {eol: '\n'}, this.options(), {throws: true, cache: false}),
+			ssrc = path.join(process.cwd(), '.snakeskinrc'),
+			options = this.options();
+
+		if (!options && exists(ssrc)) {
+			options = snakeskin.toObj(ssrc);
+		}
+
+		options = options || {};
+		options.throws = true;
+		options.cache = false;
+		options.eol = options.eol || '\n';
+
+		var
 			prettyPrint;
 
-		if (opts.exec && opts.prettyPrint) {
-			opts.prettyPrint = false;
+		if (options.exec && options.prettyPrint) {
+			options.prettyPrint = false;
 			prettyPrint = true;
 		}
 
@@ -34,13 +46,13 @@ module.exports = function (grunt) {
 			return false;
 		}
 
-		$C(this.files).forEach(function (file) {
+		this.files.forEach(function (file) {
 			var
 				isDir = !path.extname(file.dest);
 
 			function map(src) {
 				var
-					params = $C.extend(true, {}, opts),
+					params = Object.assign({}, options),
 					tpls = {},
 					res = '';
 
@@ -92,7 +104,7 @@ module.exports = function (grunt) {
 			}
 
 			if (!isDir) {
-				grunt.file.write(file.dest, $C(file.src).map(map, {filter: filter}).join(''));
+				grunt.file.write(file.dest, file.src.map(map, {filter: filter}).join(''));
 				grunt.log.writeln('File "' + file.dest + '" created.');
 			}
 		});
