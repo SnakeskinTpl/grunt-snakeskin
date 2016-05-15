@@ -4,7 +4,7 @@
   "license": "MIT",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
   "main": "Gruntfile.js",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
@@ -38,10 +38,10 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^1.0.0",
     "jscs": "^3.0.0",
-    "snakeskin": "^7.0.0-beta.30"
+    "snakeskin": "^7.0.0"
   },
   "peerDependencies": {
     "grunt": "*",
-    "snakeskin": "^7.0.0-beta.30"
+    "snakeskin": "^7.0.0"
   }
 }

@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 };
 ```
 
-## [Options](https://github.com/SnakeskinTpl/Snakeskin/wiki/compile#opt_params)
+## [Options](http://snakeskintpl.github.io/docs/api.html#compile--opt_params)
 
 ### exec
 
