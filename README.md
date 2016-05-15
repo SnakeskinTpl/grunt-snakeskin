@@ -42,7 +42,6 @@ module.exports = function (grunt) {
 ```
 
 ## [Options](http://snakeskintpl.github.io/docs/api.html#compile--opt_params)
-
 ### exec
 
 Type: `Boolean`
