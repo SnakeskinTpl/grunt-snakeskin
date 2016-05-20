@@ -9,8 +9,12 @@
 require('core-js/es6/object');
 
 var
+	$C = require('collection.js').$C;
+
+var
 	path = require('path'),
 	snakeskin = require('snakeskin'),
+	babel = require('babel-core'),
 	beautify = require('js-beautify'),
 	exists = require('exists-sync');
 
@@ -18,7 +22,8 @@ module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
 			ssrc = path.join(process.cwd(), '.snakeskinrc'),
-			opts = this.options();
+			opts = this.options(),
+			prettyPrint;
 
 		if (!this.data.options && exists(ssrc)) {
 			opts = snakeskin.toObj(ssrc);
@@ -27,12 +32,14 @@ module.exports = function (grunt) {
 		opts = opts || {};
 		opts.throws = true;
 		opts.cache = false;
-		opts.eol = opts.eol || '\n';
+		var n = opts.eol = opts.eol || '\n';
 
-		var
-			prettyPrint;
+		if (opts.jsx) {
+			opts.literalBounds = ['{', '}'];
+			opts.renderMode = 'stringConcat';
+			opts.exec = false;
 
-		if (opts.exec && opts.prettyPrint) {
+		} else if (opts.exec && opts.prettyPrint) {
 			opts.prettyPrint = false;
 			prettyPrint = true;
 		}
@@ -46,7 +53,7 @@ module.exports = function (grunt) {
 			return false;
 		}
 
-		this.files.forEach(function (file) {
+		$C(this.files).forEach(function (file) {
 			var
 				isDir = !path.extname(file.dest);
 
@@ -56,14 +63,36 @@ module.exports = function (grunt) {
 					tpls = {},
 					res = '';
 
-				if (params.exec) {
+				if (params.exec || opts.jsx) {
 					params.context = tpls;
 				}
 
 				try {
 					res = snakeskin.compile(grunt.file.read(src), params, {file: src});
+					var compileJSX = function (tpls, prop) {
+						prop = prop || 'exports';
+						$C(tpls).forEach(function (el, key) {
+							var val = prop + '["' + key.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"]';
 
-					if (params.exec) {
+							if (typeof el !== 'function') {
+								res += 'if (' + val + ' instanceof Object === false) {' + n + '\t' + val + ' = {};' + n + '}' + n + n;
+								return compileJSX(el, val);
+							}
+
+							var decl = /function .*?\)\s*\{/.exec(el.toString());
+							res += babel.transform(val + ' = ' + decl[0] + ' ' + el(opts.data) + '};', {plugins: [
+								'syntax-jsx',
+								'transform-react-jsx',
+								'transform-react-display-name'
+							]}).code;
+						});
+					};
+
+					if (opts.jsx) {
+						res = '';
+						compileJSX(tpls);
+
+					} else if (params.exec) {
 						res = snakeskin.getMainTpl(tpls, src, params.tpl) || '';
 
 						if (res) {
@@ -71,10 +100,10 @@ module.exports = function (grunt) {
 
 							if (prettyPrint) {
 								res = beautify['html'](res);
-								res = res.replace(/\r?\n|\r/g, params.eol);
+								res = res.replace(/\r?\n|\r/g, n);
 							}
 
-							res += params.eol;
+							res += n;
 						}
 					}
 
@@ -104,7 +133,7 @@ module.exports = function (grunt) {
 			}
 
 			if (!isDir) {
-				grunt.file.write(file.dest, file.src.map(map, {filter: filter}).join(''));
+				grunt.file.write(file.dest, $C(file.src).map(map, {filter: filter}).join(''));
 				grunt.log.writeln('File "' + file.dest + '" created.');
 			}
 		});

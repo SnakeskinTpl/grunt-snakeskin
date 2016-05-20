@@ -4,10 +4,10 @@
 Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) templates with Grunt.
 
 [![NPM version](http://img.shields.io/npm/v/grunt-snakeskin.svg?style=flat)](http://badge.fury.io/js/grunt-snakeskin)
+[![Build Status](http://img.shields.io/travis/SnakeskinTpl/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/grunt-snakeskin)
 [![NPM dependencies](http://img.shields.io/david/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin)
 [![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin#info=devDependencies&view=table)
 [![NPM peerDependencies](https://david-dm.org/SnakeskinTpl/grunt-snakeskin/peer-status.svg)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin#info=peerDependencies)
-[![Build Status](http://img.shields.io/travis/SnakeskinTpl/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/grunt-snakeskin)
 
 ## Install
 
@@ -42,6 +42,14 @@ module.exports = function (grunt) {
 ```
 
 ## [Options](http://snakeskintpl.github.io/docs/api.html#compile--opt_params)
+### jsx
+
+Type: `Boolean`
+
+Default: `false`
+
+If the parameter is set to `true` the templates will be converted for using with [React](https://facebook.github.io/react/index.html).
+
 ### exec
 
 Type: `Boolean`
