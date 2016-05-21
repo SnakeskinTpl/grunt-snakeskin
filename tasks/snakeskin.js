@@ -52,6 +52,7 @@ module.exports = function (grunt) {
 		if (opts.jsx) {
 			opts.literalBounds = ['{', '}'];
 			opts.renderMode = 'stringConcat';
+			opts.doctype = 'strict';
 			opts.exec = false;
 
 		} else if (opts.exec && opts.prettyPrint) {
@@ -81,7 +82,6 @@ module.exports = function (grunt) {
 				if (params.exec || opts.jsx) {
 					params.context = tpls;
 					params.module = 'cjs';
-					params.doctype = 'strict';
 				}
 
 				try {
