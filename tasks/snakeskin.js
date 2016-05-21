@@ -22,17 +22,32 @@ module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
 			ssrc = path.join(process.cwd(), '.snakeskinrc'),
-			opts = this.options(),
-			prettyPrint;
+			opts = this.options();
 
 		if (!this.data.options && exists(ssrc)) {
 			opts = snakeskin.toObj(ssrc);
 		}
 
-		opts = opts || {};
+		opts = Object.assign(
+			{
+				module: 'umd',
+				moduleId: 'tpls',
+				useStrict: true,
+				eol: '\n'
+			},
+
+			opts
+		);
+
+		var
+			eol = opts.eol,
+			mod = opts.module,
+			useStrict = opts.useStrict ? '"useStrict";' : '',
+			prettyPrint = opts.prettyPrint,
+			nRgxp = /\r?\n|\r/g;
+
 		opts.throws = true;
 		opts.cache = false;
-		var n = opts.eol = opts.eol || '\n';
 
 		if (opts.jsx) {
 			opts.literalBounds = ['{', '}'];
@@ -65,22 +80,55 @@ module.exports = function (grunt) {
 
 				if (params.exec || opts.jsx) {
 					params.context = tpls;
+					params.module = 'cjs';
+					params.doctype = 'strict';
 				}
 
 				try {
 					res = snakeskin.compile(grunt.file.read(src), params, {file: src});
+					var testId = function (id) {
+						try {
+							var obj = {};
+							eval('obj.' + id + '= true');
+							return true;
+
+						} catch (ignore) {
+							return false;
+						}
+					};
+
 					var compileJSX = function (tpls, prop) {
 						prop = prop || 'exports';
 						$C(tpls).forEach(function (el, key) {
-							var val = prop + '["' + key.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"]';
+							var
+								val,
+								validKey = false;
+
+							if (testId(key)) {
+								val = prop + '.' + key;
+								validKey = true;
+
+							} else {
+								val = prop + '["' + key.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"]';
+							}
 
 							if (typeof el !== 'function') {
-								res += 'if (' + val + ' instanceof Object === false) {' + n + '  ' + val + ' = {};' + n + '}' + n + n;
+								res +=
+									'if (' + val + ' instanceof Object === false) {' +
+										val + ' = {};' +
+										(validKey && mod === 'native' ? 'export var ' + key + '=' + val + ';' : '') +
+									'}'
+								;
+
 								return compileJSX(el, val);
 							}
 
-							var decl = /function .*?\)\s*\{/.exec(el.toString());
-							res += babel.transform(val + ' = ' + decl[0] + ' ' + el(opts.data) + '};', {
+							var
+								decl = /function .*?\)\s*\{/.exec(el.toString()),
+								text = el(opts.data);
+
+							text = val + ' = ' + decl[0] + (/\breturn\s+\(?\s*[{<](?!\/)/.test(text) ? '' : 'return ') + text + '};';
+							res += babel.transform(text, {
 								babelrc: false,
 								plugins: [
 									require('babel-plugin-syntax-jsx'),
@@ -92,8 +140,58 @@ module.exports = function (grunt) {
 					};
 
 					if (opts.jsx) {
-						res = '';
+						res = /\/\*[\s\S]*?\*\//.exec(res)[0];
+
+						if (mod === 'native') {
+							res +=
+								useStrict +
+								'import React from "react";' +
+								'var exports = {};' +
+								'export default exports;'
+							;
+
+						} else {
+							res +=
+								'(function(global, factory) {' +
+									(
+										{cjs: true, umd: true}[mod] ?
+											'if (typeof exports === "object" && typeof module !== "undefined") {' +
+												'factory(exports, typeof React === "undefined" ? require("react") : React);' +
+												'return;' +
+											'}' :
+											''
+									) +
+
+									(
+										{amd: true, umd: true}[mod] ?
+											'if (typeof define === "function" && define.amd) {' +
+												'define("' + (opts.moduleId) + '", ["exports", "react"], factory);' +
+												'return;' +
+											'}' :
+											''
+									) +
+
+									(
+										{global: true, umd: true}[mod] ?
+											'factory(global' + (opts.moduleName ? '.' + opts.moduleName + '= {}' : '') + ', React);' :
+											''
+									) +
+
+								'})(this, function (exports, React) {' +
+									useStrict
+							;
+						}
+
 						compileJSX(tpls);
+						if (mod !== 'native') {
+							res += '});';
+						}
+
+						if (prettyPrint) {
+							res = beautify.js(res);
+						}
+
+						res = res.replace(nRgxp, eol) + eol;
 
 					} else if (params.exec) {
 						res = snakeskin.getMainTpl(tpls, src, params.tpl) || '';
@@ -102,11 +200,10 @@ module.exports = function (grunt) {
 							res = res(params.data);
 
 							if (prettyPrint) {
-								res = beautify['html'](res);
-								res = res.replace(/\r?\n|\r/g, n);
+								res = beautify.html(res);
 							}
 
-							res += n;
+							res = res.replace(nRgxp, eol) + eol;
 						}
 					}
 
