@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 					} else {
 						var tpls = {};
 
-						if (params.exec || opts.jsx) {
+						if (params.exec) {
 							params.context = tpls;
 							params.module = 'cjs';
 						}
