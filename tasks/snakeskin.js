@@ -68,8 +68,8 @@ module.exports = function (grunt) {
 						var tpls = {};
 
 						if (params.exec) {
-							params.context = tpls;
 							params.module = 'cjs';
+							params.context = tpls;
 						}
 
 						res = snakeskin.compile(grunt.file.read(src), params, {file: src});
