@@ -7,9 +7,7 @@
  */
 
 require('core-js/es6/object');
-
-var
-	$C = require('collection.js').$C;
+require('core-js/es6/promise');
 
 var
 	path = require('path'),
@@ -21,7 +19,9 @@ module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		var
 			ssrc = path.join(process.cwd(), '.snakeskinrc'),
-			opts = this.options();
+			opts = this.options(),
+			done = this.async(),
+			tasks = [];
 
 		if (!this.data.options && exists(ssrc)) {
 			opts = snakeskin.toObj(ssrc);
@@ -42,82 +42,87 @@ module.exports = function (grunt) {
 			prettyPrint = true;
 		}
 
-		function filter(src) {
-			if (grunt.file.exists(src)) {
-				return true;
+		this.files.forEach(function (file) {
+			var
+				src = file.src[0];
+
+			if (!grunt.file.exists(src)) {
+				grunt.log.warn('Source file "' + src + '" not found.');
+				return;
 			}
 
-			grunt.log.warn('Source file "' + src + '" not found.');
-			return false;
-		}
-
-		$C(this.files).forEach(function (file) {
 			var
-				isDir = !path.extname(file.dest);
+				content = grunt.file.read(src),
+				savePath = file.dest;
 
-			function map(src) {
-				var
-					params = Object.assign({}, opts),
-					res = '';
+			var
+				p = Object.assign({}, opts),
+				info = {file: src};
 
-				try {
-					if (opts.jsx) {
-						res = snakeskin.compileAsJSX(grunt.file.read(src), params, {file: src});
+			if (!path.extname(savePath)) {
+				if (p.exec) {
+					savePath = path.join(savePath, path.basename(src, path.extname(src)) + '.html');
 
-					} else {
-						var tpls = {};
+				} else {
+					savePath = path.join(savePath, path.basename(src) + '.js');
+				}
+			}
 
-						if (params.exec) {
-							params.module = 'cjs';
-							params.context = tpls;
-						}
+			function cb(err, res) {
+				if (err) {
+					grunt.log.error(err.message);
 
-						res = snakeskin.compile(grunt.file.read(src), params, {file: src});
+				} else {
+					grunt.file.write(savePath, res);
+					grunt.log.writeln('File "' + file.dest + '" created.');
+				}
+			}
 
-						if (params.exec) {
-							res = snakeskin.getMainTpl(tpls, src, params.tpl) || '';
+			if (p.adapter || p.jsx) {
+				return tasks.push(require(p.jsx ? 'ss2react' : p.adapter).adapter(content, p, info).then(
+					function (res) {
+						cb(null, res);
+					},
 
-							if (res) {
-								res = res(params.data);
+					cb
+				));
+			}
 
+			try {
+				var tpls = {};
+
+				if (p.exec) {
+					p.module = 'cjs';
+					p.context = tpls;
+				}
+
+				var res = snakeskin.compile(content, p, info);
+
+				if (p.exec) {
+					res = snakeskin.getMainTpl(tpls, info.file, p.tpl) || '';
+
+					if (res) {
+						return tasks.push(snakeskin.execTpl(res, p.data).then(
+							function (res) {
 								if (prettyPrint) {
 									res = beautify.html(res);
 								}
 
-								res = res.replace(nRgxp, eol) + eol;
-							}
-						}
+								cb(null, res.replace(nRgxp, eol) + eol);
+							},
+
+							cb
+						));
 					}
-
-					if (isDir) {
-						var savePath;
-
-						if (params.exec) {
-							savePath = path.basename(src, path.extname(src)) + '.html';
-
-						} else {
-							savePath = path.basename(src) + '.js';
-						}
-
-						grunt.file.write(
-							path.join(file.dest, savePath),
-							res
-						);
-
-						grunt.log.writeln('File "' + file.dest + '" created.');
-					}
-
-				} catch (err) {
-					grunt.log.error(err.message);
 				}
 
-				return res;
-			}
+				cb(null, res);
 
-			if (!isDir) {
-				grunt.file.write(file.dest, $C(file.src).map(map, {filter: filter}).join(''));
-				grunt.log.writeln('File "' + file.dest + '" created.');
+			} catch (err) {
+				return cb(err);
 			}
 		});
+
+		Promise.all(tasks).then(done);
 	});
 };

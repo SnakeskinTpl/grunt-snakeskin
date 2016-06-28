@@ -1,0 +1,35 @@
+(function(global, factory) {
+    if (typeof exports === "object" && typeof module !== "undefined") {
+        factory(exports);
+        return;
+    }
+    if (typeof define === "function" && define.amd) {
+        define("tpls", ["exports"], factory);
+        return;
+    }
+    factory(global);
+})(this, function(exports) {
+    if (exports.vue instanceof Object === false) {
+        exports.vue = {};
+    }
+    exports.vue.index = function index() {
+        return {
+            render: function() {
+                with(this) {
+                    return _h('div', {
+                        staticClass: "foo"
+                    }, [_m(0), _s(bar)])
+                }
+            },
+            staticRenderFns: [function() {
+                with(this) {
+                    return _h('img', {
+                        staticAttrs: {
+                            "src": "./foo.jpg"
+                        }
+                    })
+                }
+            }]
+        };
+    };
+});
