@@ -44,82 +44,91 @@ module.exports = function (grunt) {
 
 		this.files.forEach(function (file) {
 			var
-				src = file.src[0];
+				isDir = !path.extname(file.dest);
 
-			if (!grunt.file.exists(src)) {
-				grunt.log.warn('Source file "' + src + '" not found.');
-				return;
+			if (isDir) {
+				file.src.forEach(f);
+
+			} else {
+				f(file.src[0]);
 			}
 
-			var
-				content = grunt.file.read(src),
-				savePath = file.dest;
-
-			var
-				p = Object.assign({}, opts),
-				info = {file: src};
-
-			if (!path.extname(savePath)) {
-				if (p.exec) {
-					savePath = path.join(savePath, path.basename(src, path.extname(src)) + '.html');
-
-				} else {
-					savePath = path.join(savePath, path.basename(src) + '.js');
-				}
-			}
-
-			function cb(err, res) {
-				if (err) {
-					grunt.log.error(err.message);
-
-				} else {
-					grunt.file.write(savePath, res);
-					grunt.log.writeln('File "' + file.dest + '" created.');
-				}
-			}
-
-			if (p.adapter || p.jsx) {
-				return tasks.push(require(p.jsx ? 'ss2react' : p.adapter).adapter(content, p, info).then(
-					function (res) {
-						cb(null, res);
-					},
-
-					cb
-				));
-			}
-
-			try {
-				var tpls = {};
-
-				if (p.exec) {
-					p.module = 'cjs';
-					p.context = tpls;
+			function f(src) {
+				if (!grunt.file.exists(src)) {
+					grunt.log.warn('Source file "' + src + '" not found.');
+					return;
 				}
 
-				var res = snakeskin.compile(content, p, info);
+				var
+					content = grunt.file.read(src),
+					savePath = file.dest;
 
-				if (p.exec) {
-					res = snakeskin.getMainTpl(tpls, info.file, p.tpl) || '';
+				var
+					p = Object.assign({}, opts),
+					info = {file: src};
 
-					if (res) {
-						return tasks.push(snakeskin.execTpl(res, p.data).then(
-							function (res) {
-								if (prettyPrint) {
-									res = beautify.html(res);
-								}
+				if (isDir) {
+					if (p.exec) {
+						savePath = path.join(savePath, path.basename(src, path.extname(src)) + '.html');
 
-								cb(null, res.replace(nRgxp, eol) + eol);
-							},
-
-							cb
-						));
+					} else {
+						savePath = path.join(savePath, path.basename(src) + '.js');
 					}
 				}
 
-				cb(null, res);
+				function cb(err, res) {
+					if (err) {
+						grunt.log.error(err.message);
 
-			} catch (err) {
-				return cb(err);
+					} else {
+						grunt.file.write(savePath, res);
+						grunt.log.writeln('File "' + file.dest + '" created.');
+					}
+				}
+
+				if (p.adapter || p.jsx) {
+					return tasks.push(require(p.jsx ? 'ss2react' : p.adapter).adapter(content, p, info).then(
+						function (res) {
+							cb(null, res);
+						},
+
+						cb
+					));
+				}
+
+				try {
+					var tpls = {};
+
+					if (p.exec) {
+						p.module = 'cjs';
+						p.context = tpls;
+					}
+
+					var res = snakeskin.compile(content, p, info);
+
+					if (p.exec) {
+						res = snakeskin.getMainTpl(tpls, info.file, p.tpl) || '';
+
+						if (res) {
+							return tasks.push(snakeskin.execTpl(res, p.data).then(
+								function (res) {
+									if (prettyPrint) {
+										res = beautify.html(res);
+									}
+
+									cb(null, res.replace(nRgxp, eol) + eol);
+								},
+
+								cb
+							));
+						}
+					}
+
+					cb(null, res);
+
+				} catch (err) {
+					return cb(err);
+				}
 			}
 		});
 
