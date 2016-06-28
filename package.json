@@ -36,7 +36,6 @@
     "eslint": "^2.13.1",
     "grunt": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^1.0.0",
     "snakeskin": "^7.1.9",
     "ss2vue": "^1.0.3",
