@@ -6,8 +6,7 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-require('core-js/es6/object');
-require('core-js/es6/promise');
+require('core-js');
 
 var
 	path = require('path'),
