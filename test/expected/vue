@@ -24,7 +24,7 @@
             staticRenderFns: [function() {
                 with(this) {
                     return _h('img', {
-                        staticAttrs: {
+                        attrs: {
                             "src": "./foo.jpg"
                         }
                     })
