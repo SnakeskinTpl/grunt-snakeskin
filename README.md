@@ -6,8 +6,8 @@ Using [Snakeskin](https://github.com/SnakeskinTpl/Snakeskin) templates with Grun
 [![NPM version](http://img.shields.io/npm/v/grunt-snakeskin.svg?style=flat)](http://badge.fury.io/js/grunt-snakeskin)
 [![Build Status](http://img.shields.io/travis/SnakeskinTpl/grunt-snakeskin.svg?style=flat&branch=master)](https://travis-ci.org/SnakeskinTpl/grunt-snakeskin)
 [![NPM dependencies](http://img.shields.io/david/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin)
-[![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin#info=devDependencies&view=table)
-[![NPM peerDependencies](https://david-dm.org/SnakeskinTpl/grunt-snakeskin/peer-status.svg)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin#info=peerDependencies)
+[![NPM devDependencies](http://img.shields.io/david/dev/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin?type=dev)
+[![NPM peerDependencies](http://img.shields.io/david/peer/SnakeskinTpl/grunt-snakeskin.svg?style=flat)](https://david-dm.org/SnakeskinTpl/grunt-snakeskin?type=peer)
 
 ## Install
 
