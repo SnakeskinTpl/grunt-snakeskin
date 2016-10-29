@@ -1,3 +1,5 @@
+'use strict';
+
 /*!
  * grunt-snakeskin
  * https://github.com/SnakeskinTpl/grunt-snakeskin
@@ -6,16 +8,18 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-var grunt = require('grunt');
+const
+	grunt = require('grunt');
+
 exports.snakeskin = {
-	setUp: function (done) {
+	setUp(done) {
 		done();
 	},
 
-	test: function (test) {
+	test(test) {
 		test.expect(3);
 
-		var
+		const
 			js = require('../tmp/test.js'),
 			html = grunt.file.read('tmp/test.html'),
 			vue = grunt.file.read('tmp/vue.js').replace(/\/\*[\s\S]*?\*\/\s*/, '');

@@ -18,7 +18,7 @@
     "url": "https://github.com/SnakeskinTpl/grunt-snakeskin/issues"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "scripts": {
     "test": "grunt test"
@@ -28,11 +28,11 @@
     "snakeskin"
   ],
   "dependencies": {
-    "core-js": "^2.1.1",
     "exists-sync": "0.0.3",
     "js-beautify": "^1.5.4"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.0",
     "eslint": "^3.0.0",
     "grunt": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",

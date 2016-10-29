@@ -1,3 +1,5 @@
+'use strict';
+
 /*!
  * grunt-snakeskin
  * https://github.com/SnakeskinTpl/grunt-snakeskin
@@ -6,9 +8,7 @@
  * https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE
  */
 
-require('core-js');
-
-var
+const
 	path = require('path'),
 	snakeskin = require('snakeskin'),
 	beautify = require('js-beautify'),
@@ -16,33 +16,33 @@ var
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
-		var
+		const
 			ssrc = path.join(process.cwd(), '.snakeskinrc'),
-			opts = this.options(),
 			done = this.async(),
 			tasks = [];
 
+		let opts = this.options();
 		if (!this.data.options && exists(ssrc)) {
 			opts = snakeskin.toObj(ssrc);
 		}
 
 		opts = Object.assign({eol: '\n'}, opts);
 
-		var
+		const
 			eol = opts.eol,
-			prettyPrint = opts.prettyPrint,
 			nRgxp = /\r?\n|\r/g;
 
 		opts.throws = true;
 		opts.cache = false;
 
+		let prettyPrint = opts.prettyPrint;
 		if (opts.exec && opts.prettyPrint) {
 			opts.prettyPrint = false;
 			prettyPrint = true;
 		}
 
-		this.files.forEach(function (file) {
-			var
+		this.files.forEach((file) => {
+			const
 				isDir = !path.extname(file.dest);
 
 			if (isDir) {
@@ -54,24 +54,22 @@ module.exports = function (grunt) {
 
 			function f(src) {
 				if (!grunt.file.exists(src)) {
-					grunt.log.warn('Source file "' + src + '" not found.');
+					grunt.log.warn(`Source file "${src}" not found.`);
 					return;
 				}
 
-				var
+				const
 					content = grunt.file.read(src),
-					savePath = file.dest;
-
-				var
 					p = Object.assign({}, opts),
 					info = {file: src};
 
+				let savePath = file.dest;
 				if (isDir) {
 					if (p.exec) {
-						savePath = path.join(savePath, path.basename(src, path.extname(src)) + '.html');
+						savePath = path.join(savePath, `${path.basename(src, path.extname(src))}.html`);
 
 					} else {
-						savePath = path.join(savePath, path.basename(src) + '.js');
+						savePath = path.join(savePath, `${path.basename(src)}.js`);
 					}
 				}
 
@@ -81,13 +79,13 @@ module.exports = function (grunt) {
 
 					} else {
 						grunt.file.write(savePath, res);
-						grunt.log.writeln('File "' + file.dest + '" created.');
+						grunt.log.writeln(`File "${file.dest}" created.`);
 					}
 				}
 
 				if (p.adapter || p.jsx) {
 					return tasks.push(require(p.jsx ? 'ss2react' : p.adapter).adapter(content, p, info).then(
-						function (res) {
+						(res) => {
 							cb(null, res);
 						},
 
@@ -96,21 +94,23 @@ module.exports = function (grunt) {
 				}
 
 				try {
-					var tpls = {};
+					const
+						tpls = {};
 
 					if (p.exec) {
 						p.module = 'cjs';
 						p.context = tpls;
 					}
 
-					var res = snakeskin.compile(content, p, info);
+					let
+						res = snakeskin.compile(content, p, info);
 
 					if (p.exec) {
 						res = snakeskin.getMainTpl(tpls, info.file, p.tpl) || '';
 
 						if (res) {
 							return tasks.push(snakeskin.execTpl(res, p.data).then(
-								function (res) {
+								(res) => {
 									if (prettyPrint) {
 										res = beautify.html(res);
 									}

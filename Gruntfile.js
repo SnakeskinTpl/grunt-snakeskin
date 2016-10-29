@@ -1,3 +1,5 @@
+'use strict';
+
 /*!
  * grunt-snakeskin
  * https://github.com/SnakeskinTpl/grunt-snakeskin
