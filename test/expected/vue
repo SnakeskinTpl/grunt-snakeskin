@@ -16,20 +16,16 @@
         return {
             render: function() {
                 with(this) {
-                    return _h('div', {
+                    return _c('div', {
                         staticClass: "foo"
-                    }, [_m(0), _s(bar)])
-                }
-            },
-            staticRenderFns: [function() {
-                with(this) {
-                    return _h('img', {
+                    }, [_c('img', {
                         attrs: {
                             "src": "./foo.jpg"
                         }
-                    })
+                    }), _v(_s(bar))])
                 }
-            }]
+            },
+            staticRenderFns: []
         };
     };
 });
