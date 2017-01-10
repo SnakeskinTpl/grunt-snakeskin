@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 			opts = snakeskin.toObj(ssrc);
 		}
 
-		opts = Object.assign({eol: '\n'}, opts);
+		opts = Object.assign({eol: '\n', dext: '.html'}, opts);
 
 		const
 			eol = opts.eol,
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
 				let savePath = file.dest;
 				if (isDir) {
 					if (p.exec) {
-						savePath = path.join(savePath, `${path.basename(src, path.extname(src))}.html`);
+						savePath = path.join(savePath, path.basename(src, path.extname(src)) + opts.dext);
 
 					} else {
 						savePath = path.join(savePath, `${path.basename(src)}.js`);
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 
 				function cb(err, res) {
 					if (err) {
-						grunt.log.error(err.message);
+						grunt.fatal(err, 4);
 
 					} else {
 						grunt.file.write(savePath, res);
