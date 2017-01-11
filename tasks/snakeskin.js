@@ -79,7 +79,7 @@ module.exports = function (grunt) {
 
 					} else {
 						grunt.file.write(savePath, res);
-						grunt.log.writeln(`File "${file.dest}" created.`);
+						grunt.log.writeln(`File "${savePath}" created.`);
 					}
 				}
 
