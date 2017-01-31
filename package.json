@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "exists-sync": "0.0.3",
-    "js-beautify": "^1.5.4"
+    "js-beautify": "^1.5.4",
+    "require-from-string": "^1.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
