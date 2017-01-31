@@ -107,13 +107,13 @@ module.exports = function (grunt) {
 					// Do not compile, if source already compiled
 					if(src.substr(src.length - 3) == '.js') {
 						if(!p.exec) {
-	          	grunt.fail.warn('Exec flag is not set for compiled template: ' + src + '\n')
+							grunt.fail.warn('Exec flag is not set for compiled template: ' + src + '\n')
 						}
-	          res = requireFromString(content)
-	        }
-	        else {
+						res = requireFromString(content)
+					}
+					else {
 						res = snakeskin.compile(content, p, info);
-	        }
+					}
 
 					if (p.exec) {
 						res = snakeskin.getMainTpl(tpls, info.file, p.tpl) || '';
