@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 							grunt.fail.warn('Exec flag is not set for compiled template: ${src}\n');
 						}
 						res = requireFromString(content);
-					}	else {
+					} else {
 						res = snakeskin.compile(content, p, info);
 					}
 
