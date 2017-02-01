@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         },
 
         files: {
-          'html/': ['test/fixtures/*.ss', 'compiled/*.ss.js']
+          'html/': ['test/fixtures/*.ss']
         }
       }
     }
@@ -91,8 +91,25 @@ Data for the executable template (if is set `exec`).
 
 ## Speed up your build
 
-Do not compile templates with exec: true option. Specify already compiled source files.
+Do not compile templates with 'exec: true' option. Specify already compiled source files.
+```js
+grunt.initConfig({
+  snakeskin: {
+    compile: {
+      options: {
+        exec: true,
+      },
 
+      files: {
+        'html/': ['compiled/*.ss.js']
+      },
+
+      // Additional dependencies for grunt-newer
+      deps: ['mycode.js']
+    }
+  }
+});
+```
 ### Compile newer files only.
 
 ```bash
@@ -115,7 +132,7 @@ var cfg = {
           include = !snakeskin.check(detail.path, dst);
         }
 
-        // Check deps from target configuration
+        // Check additional deps from target configuration
         if(!include && detail.config.deps) {
           detail.config.deps.forEach(function(fn) {
             var ts = fs.statSync(fn).mtime;
