@@ -30,7 +30,7 @@ module.exports = function (grunt) {
         },
 
         files: {
-          'html/': ['test/fixtures/*.ss']
+          'html/': ['test/fixtures/*.ss', 'compiled/*.ss.js']
         }
       }
     }
@@ -88,6 +88,54 @@ The name of the executable template (if is set `exec`), if the parameter is not 
 Type: `?`
 
 Data for the executable template (if is set `exec`).
+
+## Speed up your build
+
+Do not compile templates with exec: true option. Specify already compiled source files.
+
+## Compile with newer files only.
+
+```bash
+npm install grunt-newer --save-dev
+```
+
+Specify override function for grunt-newer in the following way:
+
+```js
+var cfg = {
+  ...
+  newer: {
+    options: {
+      override: function(detail, callback) {
+        var include;
+        // Check snakeskin include dependencies
+        if (detail.task == 'snakeskin' && detail.target == 'compile') {
+          // We know only source file from newer
+          var dst = SS_BUILD_DIR + '/' + path.basename(detail.path) + '.js';
+          include = !snakeskin.check(detail.path, dst);
+        }
+
+        // Check deps from target configuration
+        if(!include && detail.config.deps) {
+          detail.config.deps.forEach(function(fn) {
+            var ts = fs.statSync(fn).mtime;
+            var difference = detail.time - ts;
+            if(difference < this.tolerance ) {
+              console.log(detail.path + ' has a newer dependency ' + fn);
+              include = true;
+              return false;
+            }
+          }, this);
+        }
+
+        callback(include);
+      }
+    }
+  },
+  ...
+};
+```
+
 
 ## [License](https://github.com/SnakeskinTpl/grunt-snakeskin/blob/master/LICENSE)
 
