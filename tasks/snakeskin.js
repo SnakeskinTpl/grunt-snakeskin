@@ -80,7 +80,7 @@ module.exports = function (grunt) {
 
 					} else {
 						grunt.file.write(savePath, res);
-						grunt.log.writeln(`File "${savePath}" created.`);
+						grunt.log.writeln(`File "${savePath}" ${p.exec ? 'rendered' : 'compiled'}.`);
 					}
 				}
 
