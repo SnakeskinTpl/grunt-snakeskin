@@ -93,13 +93,13 @@ Data for the executable template (if is set `exec`).
 
 Do not compile templates with exec: true option. Specify already compiled source files.
 
-## Compile with newer files only.
+### Compile newer files only.
 
 ```bash
 npm install grunt-newer --save-dev
 ```
 
-Specify override function for grunt-newer in the following way:
+Specify grunt-newer override function in the following way:
 
 ```js
 var cfg = {
