@@ -91,7 +91,7 @@ Data for the executable template (if is set `exec`).
 
 ## Speed up your build
 
-Do not compile templates with 'exec: true' option. Specify already compiled source files.
+Do not recompile templates with `exec: true` option.
 ```js
 grunt.initConfig({
   snakeskin: {
@@ -101,6 +101,7 @@ grunt.initConfig({
       },
 
       files: {
+        // Specify compiled template as source
         'html/': ['compiled/*.ss.js']
       },
 
