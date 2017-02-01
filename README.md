@@ -95,7 +95,7 @@ Do not recompile templates with `exec: true` option.
 ```js
 grunt.initConfig({
   snakeskin: {
-    compile: {
+    render: {
       options: {
         exec: true,
       },
@@ -126,7 +126,8 @@ var cfg = {
     options: {
       override: function(detail, callback) {
         var include;
-        // Check snakeskin include dependencies
+
+        // Check snakeskin include deps
         if (detail.task == 'snakeskin' && detail.target == 'compile') {
           // We know only source file from newer
           var dst = SS_BUILD_DIR + '/' + path.basename(detail.path) + '.js';
