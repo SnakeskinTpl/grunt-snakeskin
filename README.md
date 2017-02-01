@@ -91,7 +91,7 @@ Data for the executable template (if is set `exec`).
 
 ## Speed up your build
 
-Do not recompile templates with `exec: true` option.
+Do not recompile templates with `exec: true` option:
 ```js
 grunt.initConfig({
   snakeskin: {
@@ -111,7 +111,7 @@ grunt.initConfig({
   }
 });
 ```
-### Compile newer files only.
+### Compile newer files only
 
 ```bash
 npm install grunt-newer --save-dev
@@ -120,7 +120,7 @@ npm install grunt-newer --save-dev
 Specify grunt-newer override function in the following way:
 
 ```js
-var cfg = {
+var gruntCfg = {
   ...
   newer: {
     options: {
