@@ -15,6 +15,9 @@ const
 	exists = require('exists-sync'),
 	requireFromString = require('require-from-string');
 
+// Pass snakeskin global vars to compiled templates
+global.Snakeskin = snakeskin
+
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
 		const
@@ -95,7 +98,7 @@ module.exports = function (grunt) {
 				}
 
 				try {
-					const
+					let
 						tpls = {};
 
 					if (p.exec) {
@@ -109,9 +112,8 @@ module.exports = function (grunt) {
 						if (!p.exec) {
 							grunt.fail.warn(`Exec flag is not set for compiled template: ${src}`);
 						}
-
-						res = requireFromString(content);
-
+						Object.assign(snakeskin.Vars, p.vars);
+						tpls = requireFromString(content);
 					} else {
 						res = snakeskin.compile(content, p, info);
 					}
