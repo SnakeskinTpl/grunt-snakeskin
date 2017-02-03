@@ -140,7 +140,7 @@ var gruntCfg = {
           	var fn = detail.config.deps[i];
             var ts = fs.statSync(fn).mtime;
             var difference = detail.time - ts;
-            if(difference < this.tolerance ) {
+            if (difference < this.tolerance) {
               console.log(detail.path + ' has a newer dependency ' + fn);
               return include(true);
             }
