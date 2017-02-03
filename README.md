@@ -124,30 +124,29 @@ var gruntCfg = {
   ...
   newer: {
     options: {
-      override: function(detail, callback) {
-        var include;
-
-        // Check snakeskin include deps
-        if (detail.task == 'snakeskin' && detail.target == 'compile') {
-          // We know only source file from newer
+      override: function(detail, include) {
+        // Check snakeskin include dependencies
+        if (detail.task == 'snakeskin' && detail.target.includes('compile')) {
+          // Build dest path from template source path
           var dst = SS_BUILD_DIR + '/' + path.basename(detail.path) + '.js';
-          include = !snakeskin.check(detail.path, dst);
+          if(!snakeskin.check(detail.path, dst))
+						return include(true);
         }
 
-        // Check additional deps from target configuration
-        if(!include && detail.config.deps) {
-          detail.config.deps.forEach(function(fn) {
+        // Check deps from target configuration
+        // detail.config was requested: https://github.com/tschaub/grunt-newer/pull/115
+        if (detail.config.deps) {
+					for (var i = 0; i < detail.config.deps.length; i++) {
+          	var fn = detail.config.deps[i];
             var ts = fs.statSync(fn).mtime;
             var difference = detail.time - ts;
             if(difference < this.tolerance ) {
               console.log(detail.path + ' has a newer dependency ' + fn);
-              include = true;
-              return false;
+              return include(true);
             }
-          }, this);
         }
 
-        callback(include);
+        return include();
       }
     }
   },
