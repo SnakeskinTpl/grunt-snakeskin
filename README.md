@@ -129,7 +129,7 @@ var gruntCfg = {
         if (detail.task == 'snakeskin' && detail.target.includes('compile')) {
           // Build dest path from template source path
           var dst = SS_BUILD_DIR + '/' + path.basename(detail.path) + '.js';
-          if(!snakeskin.check(detail.path, dst))
+          if(snakeskin.check(detail.path, dst))
 						return include(true);
         }
 
