@@ -112,6 +112,9 @@ module.exports = function (grunt) {
 						if (!p.exec) {
 							grunt.fail.warn(`Exec flag is not set for compiled template: ${src}`);
 						}
+
+						// Remove '.js' extension
+						info.file = info.file.slice(0, -3);
 						Object.assign(snakeskin.Vars, p.vars);
 						tpls = requireFromString(content);
 					} else {
