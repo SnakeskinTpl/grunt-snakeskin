@@ -16,7 +16,7 @@ const
 	requireFromString = require('require-from-string');
 
 // Pass snakeskin global vars to compiled templates
-global.Snakeskin = snakeskin
+global.Snakeskin = snakeskin;
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('snakeskin', 'Compile Snakeskin templates', function () {
@@ -117,6 +117,7 @@ module.exports = function (grunt) {
 						info.file = info.file.slice(0, -3);
 						Object.assign(snakeskin.Vars, p.vars);
 						tpls = requireFromString(content);
+
 					} else {
 						res = snakeskin.compile(content, p, info);
 					}
