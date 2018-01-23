@@ -12,7 +12,6 @@ const
 	path = require('path'),
 	snakeskin = require('snakeskin'),
 	beautify = require('js-beautify'),
-	exists = require('exists-sync'),
 	requireFromString = require('require-from-string');
 
 // Pass snakeskin global vars to compiled templates
@@ -26,7 +25,7 @@ module.exports = function (grunt) {
 			tasks = [];
 
 		let opts = this.options();
-		if (!this.data.options && exists(ssrc)) {
+		if (!this.data.options && grunt.file.exists(ssrc)) {
 			opts = snakeskin.toObj(ssrc);
 		}
 

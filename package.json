@@ -4,7 +4,7 @@
   "license": "MIT",
   "homepage": "https://github.com/SnakeskinTpl/grunt-snakeskin",
   "main": "Gruntfile.js",
-  "version": "7.4.0",
+  "version": "7.4.1",
   "author": {
     "name": "kobezzza",
     "email": "kobezzza@mail.ru",
@@ -28,19 +28,18 @@
     "snakeskin"
   ],
   "dependencies": {
-    "exists-sync": "0.0.3",
-    "js-beautify": "^1.5.4",
-    "require-from-string": "^1.2.1"
+    "js-beautify": "^1.7.5",
+    "require-from-string": "^2.0.1"
   },
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "eslint": "^4.16.0",
     "grunt": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-nodeunit": "^1.0.0",
     "snakeskin": "^7.1.9",
     "ss2vue": "^1.0.3",
-    "vue-template-compiler": "^2.0.0-alpha.8",
-    "vue-template-es2015-compiler": "^1.5.2"
+    "vue-template-compiler": "^2.5.13",
+    "vue-template-es2015-compiler": "^1.6.0"
   },
   "peerDependencies": {
     "grunt": "*",
