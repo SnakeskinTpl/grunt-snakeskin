@@ -28,18 +28,18 @@
     "snakeskin"
   ],
   "dependencies": {
-    "js-beautify": "^1.7.5",
-    "require-from-string": "^2.0.1"
+    "js-beautify": "^1.10.0",
+    "require-from-string": "^2.0.2"
   },
   "devDependencies": {
-    "eslint": "^4.16.0",
-    "grunt": "^1.0.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-nodeunit": "^1.0.0",
-    "snakeskin": "^7.1.9",
+    "eslint": "^5.16.0",
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-nodeunit": "^2.0.0",
+    "snakeskin": "^7.5.1",
     "ss2vue": "^1.0.3",
-    "vue-template-compiler": "^2.5.13",
-    "vue-template-es2015-compiler": "^1.6.0"
+    "vue-template-compiler": "^2.6.10",
+    "vue-template-es2015-compiler": "^1.9.1"
   },
   "peerDependencies": {
     "grunt": "*",
